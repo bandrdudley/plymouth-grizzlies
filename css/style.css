@@ -9,20 +9,21 @@
       margin-left: 40px;
   }
 
+  .row {
+	   width: 100%;
+	   display: flex;
+	   //flex-wrap: wrap;
+     margin-top: 4em;
+  }
+
   #navcontainer {
-    margin-top: 4em;
+    width: 75%;
   }
 
   #navcontainer ul {
-      //margin-top: 15em;
-      width: 100%;
-  }
-
-  #navcontainer ul {
-      margin: 0;
       padding: 0;
       list-style-type: none;
-      text-align: center;
+      text-align: right;
   }
 
   #navcontainer ul li {
@@ -30,6 +31,11 @@
       padding: .2em,  1em;
       color: #212c48;
       display: inline;
+  }
+
+  #logo {
+    width: 355px;
+    margin-left: 5px;
   }
 
   #home-image {
@@ -50,13 +56,6 @@
     width: 100%;
     height: 100px;
     background-color: lightblue;
-  }
-
-  #logo {
-    margin-top: -1em;
-    display: block;
-    position: absolute;
-    left: 5;
   }
 
   #summary {
