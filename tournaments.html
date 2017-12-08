@@ -7,10 +7,11 @@
   <link href='https://fonts.googleapis.com/css?family=Bevan' rel='stylesheet'>
   <link href='https://fonts.googleapis.com/css?family=ABeeZee' rel='stylesheet'>
   <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+  <script type="text/javascript" src="https://unpkg.com/vue@2.5.8/dist/vue.js"></script>
   <title>Plymouth Grizzlies Tournaments</title>
   <style>
     #content {
-      height: 500px;
+      height: 638px;
     }
     #name {
       font-weight: bold;
@@ -44,55 +45,81 @@
       </div>
   </div>
   <hr/>
-  <script type="text/javascript" src="https://unpkg.com/vue@2.5.8/dist/vue.js"></script>
-
 
     <div id="content">
-      <h3 id="header">{{msg}}</h3>
-      <ul id="list">
-      <div v-for="tournament in tournanments">
-        <li>
-          <span id="name">{{tournament.name}}</span><br>
-          <span id="details">{{tournament.date}}<br>
-          {{tournament.location}}<br><br></span>
-        </li>
-      </div>
-        </ul>
+      <tournament-list :tournaments="theTournaments" title="Tournaments"></tournament-list>
   </div>
 </div>
 
 <script>
+  Vue.component('tournament-list', {
+      template: '<div class="tournament-list">\
+                  <h3 id="header">{{title}}</h3>\
+                  <ul>\
+                    <li v-for="tournament in tournaments">\
+                      <img :src="tournament.image">\
+                      <p><strong>{{tournament.name}}</strong><br>\
+                      {{tournament.date}}<br>\
+                      {{tournament.location}}</p>\
+                    </li>\
+                  </ul>\
+                </div>',
+      props: ['title', 'tournaments']
+  });
+
   var vm = new Vue({
     el: '#app',
     data: {
       msg: 'Tournaments',
       homeurl: 'index.html',
       tourneyurl: 'tournaments.html',
-      tournanments: [
+      theTournaments: [
           {
             name: 'Zero Gravity Battle For The Belt',
             date: 'Oct 28-29, 2017',
-            location: 'Hanover and Foxboro, MA'
+            location: 'Hanover and Foxboro, MA',
+            image: 'images\\battle-for-the-belt.png'
           },
           {
             name: 'Boston Warriors Fall Wrap Up Classic',
             date: 'Nov 3-5, 2017',
-            location: 'Foxboro, MA'
+            location: 'Foxboro, MA',
+            image: 'images\\boston-warriors.jpg'
           },
           {
             name: 'Wolves Den HS Warm - Up',
             date: 'Nov 11-12, 2017',
-            location: 'Pembroke, MA'
+            location: 'Pembroke, MA',
+            image: 'images\\wolves-den.png'
           },
           {
             name: 'TEAM MASS Fall Blast',
             date: 'Nov 18-19, 2017',
-            location: 'Sturbridge, MA'
+            location: 'Sturbridge, MA',
+            image: 'images\\team-mass.png'
           }
-        ]
+      ]
     }
   });
 </script>
+
+<style>
+    .tournament-list h2 {
+        margin-bottom: 40px;
+    }
+    .tournament-list ul img {
+        float: left;
+        margin-right: 10px;
+        margin-bottom: 10px;
+    }
+    .tournament-list ul {
+        list-style-type: none;
+    }
+    .tournament-list li {
+        margin-bottom: 40px;
+        clear: both;
+    }
+</style>
 
   <hr/>
   <div id="footer">
@@ -103,9 +130,6 @@
     are volunteers and most games are scheduled on weekends.
     </div>
   </div>
-
-
-
 
 <body>
 </html>
