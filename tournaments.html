@@ -37,7 +37,7 @@
         <ul>
           <li><a v-bind:href="homeurl">Home</a></li>
           <li><a v-bind:href="tourneyurl">Tournaments</a></li>
-          <li>Photos</li>
+          <li><a v-bind:href="photosurl">Photos</a></li>
           <li>Gym Directions</li>
           <li>Payment</li>
           <li>About Us</li>
@@ -47,7 +47,8 @@
   <hr/>
 
     <div id="content">
-      <tournament-list :tournaments="theTournaments" title="Tournaments"></tournament-list>
+      <!--<tournament-list :tournaments="theTournaments" title="Tournaments"></tournament-list>-->
+      <component is="tournament-list" :tournaments="theTournaments" title="Tournaments"></component>
   </div>
 </div>
 
@@ -56,15 +57,21 @@
       template: '<div class="tournament-list">\
                   <h3 id="header">{{title}}</h3>\
                   <ul>\
-                    <li v-for="tournament in tournaments">\
-                      <img :src="tournament.image">\
-                      <p><strong>{{tournament.name}}</strong><br>\
-                      {{tournament.date}}<br>\
-                      {{tournament.location}}</p>\
-                    </li>\
+                    <tournament-list-item v-for="tournament in tournaments" :tournament="tournament">\
+                    </tournament-list-item>\
                   </ul>\
                 </div>',
       props: ['title', 'tournaments']
+  });
+
+  Vue.component('tournament-list-item', {
+    template: '<li>\
+        <img :src="tournament.image">\
+        <p><strong>{{tournament.name}}</strong><br>\
+        {{tournament.date}}<br>\
+        {{tournament.location}}</p>\
+      </li>',
+    props: ['tournament']
   });
 
   var vm = new Vue({
@@ -73,6 +80,7 @@
       msg: 'Tournaments',
       homeurl: 'index.html',
       tourneyurl: 'tournaments.html',
+      photosurl: 'photos.html',
       theTournaments: [
           {
             name: 'Zero Gravity Battle For The Belt',
